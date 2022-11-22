@@ -1,0 +1,251 @@
+﻿<Window x:Class="AdoNet_Exam.Windows.UsersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdoNet_Exam.Windows"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:extend="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="UsersWindow" Height="600" Width="900" WindowStartupLocation="CenterScreen" Icon="/Windows/LibraryIcon.jpg" MouseDown="Window_MouseDown" ResizeMode="NoResize" WindowStyle="None">
+
+    <Window.Resources>
+
+
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontSize" Value="13"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
+
+        <Style TargetType="extend:WatermarkTextBox">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontSize" Value="17"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="BorderThickness" Value="0.5" ></Setter>
+            <Setter Property="BorderBrush" Value="White" ></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyles" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"></Setter>
+
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="170"></Setter>
+            <Setter Property="BorderThickness" Value="1.5" ></Setter>
+            <Setter Property="BorderBrush" Value="White" ></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+           
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="1.5" BorderBrush="White" BorderThickness="1.2" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,5,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.3"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="#FF658EAA" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="FontSize" To="15">
+
+                                </DoubleAnimation>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetProperty="FontSize" To="14">
+
+                                </DoubleAnimation>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+
+
+
+
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Image Grid.RowSpan="4" Stretch="Fill" Source="/Windows/UserWallpaper.jpg"></Image>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="100" ></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="170"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" HorizontalAlignment="Left">Welcome</TextBlock>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding UserLogin}"></TextBlock>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Center" FontSize="20" >Library Shop</TextBlock>
+            <Button x:Name="CloseButton" Click="CloseButton_Click" Content="❌" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50"  Grid.Column="3" Style="{StaticResource ButtonStyles}" Margin="0,5,0,0"></Button>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock FontSize="15" Grid.Column="0">Input Book Name, Author Or Genre</TextBlock>
+            <Image Height="17" Grid.Column="1" Source="/Windows/Search.png" Stretch="Uniform"></Image>
+            <extend:WatermarkTextBox Width="270" TextChanged="txtFilter_TextChanged" Name="SearchingTextBox" Grid.Column="2" HorizontalAlignment="Left" Watermark="  Book Name | Author | Genre "></extend:WatermarkTextBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="178*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="257*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="80" ></ColumnDefinition>
+                        <ColumnDefinition Width="120"></ColumnDefinition>
+                        <ColumnDefinition Width="80" ></ColumnDefinition>
+                        <ColumnDefinition Width="80" ></ColumnDefinition>
+                        <ColumnDefinition Width="80" ></ColumnDefinition>
+                        <ColumnDefinition Width="80" ></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="0">Book Name</TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="1">Pages</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Grid.Column="2">Year</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Grid.Column="3">Discount % </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="4">Price $</TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="5">Quantity</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Grid.Column="6">Genre</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Grid.Column="7">Author</TextBlock>
+                </Grid>
+
+                <ListView Grid.Row="1" MouseDoubleClick="ListOfBooks_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="ListOfBooks" SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding Books}" Grid.ColumnSpan="3">
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"   ></ColumnDefinition>
+                                        <ColumnDefinition Width="80"    ></ColumnDefinition>
+                                        <ColumnDefinition Width="120"   ></ColumnDefinition>
+                                        <ColumnDefinition Width="80"    ></ColumnDefinition>
+                                        <ColumnDefinition Width="80"    ></ColumnDefinition>
+                                        <ColumnDefinition Width="80"    ></ColumnDefinition>
+                                        <ColumnDefinition Width="80"    ></ColumnDefinition>
+                                        <ColumnDefinition Width="200"   ></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column ="0" Content ="{Binding Name}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="1" Content ="{Binding AmountOfPages}"     Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="2" Content ="{Binding Year}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="3" Content ="{Binding DiscountPercent}"   Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="4" Content ="{Binding Price}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="5" Content ="{Binding AmountOfBook}"      Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="6" Content ="{Binding BookGenre}"         Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="7" Content ="{Binding BookAuthor}"        Foreground="GhostWhite"    FontSize ="14"></Label>
+
+                                </Grid>
+
+
+
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+
+        </Grid>
+
+        <Grid Grid.Row="3">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="MakeAnOrder" Click="MakeAnOrder_Click" Grid.Column="0" Style ="{StaticResource ButtonStyles}">Make An Order</Button>
+            <DatePicker Foreground="GhostWhite" Name="OrderDatePicker" Grid.Column="1"></DatePicker>
+            <Button Name="MyOrdersButton" Click="MyOrdersButton_Click" Grid.Column="2" Style="{StaticResource ButtonStyles}">My Orders</Button>
+        </Grid>
+    </Grid>
+</Window>

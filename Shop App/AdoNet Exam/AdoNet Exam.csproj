@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>AdoNet_Exam</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\BookIcon.png" />
+    <None Remove="Assets\Library1.jpg" />
+    <None Remove="Assets\LibraryIcon.jpg" />
+    <None Remove="Assets\OrdersWallpaper.jpg" />
+    <None Remove="Assets\Password.jpg" />
+    <None Remove="Assets\Search.png" />
+    <None Remove="Assets\UserIcon1.png" />
+    <None Remove="Assets\UserWallpaper.jpg" />
+    <None Remove="BookIcon.png" />
+    <None Remove="Library1.jpg" />
+    <None Remove="Password.jpg" />
+    <None Remove="UserIcon1.png" />
+    <None Remove="Windows\BookIcon.png" />
+    <None Remove="Windows\LibraryIcon.jpg" />
+    <None Remove="Windows\Search.png" />
+    <None Remove="Windows\SingUpWallpaper.jpg" />
+    <None Remove="Windows\UserWallpaper.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\BookIcon.png" />
+    <Content Include="Assets\Library1.jpg" />
+    <Content Include="Assets\LibraryIcon.jpg" />
+    <Content Include="Assets\OrdersWallpaper.jpg" />
+    <Content Include="Assets\Password.jpg" />
+    <Content Include="Assets\Search.png" />
+    <Content Include="Assets\UserIcon1.png" />
+    <Content Include="Assets\UserWallpaper.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.2.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BookIcon.png" />
+    <Resource Include="Library1.jpg" />
+    <Resource Include="Password.jpg" />
+    <Resource Include="UserIcon1.png" />
+    <Resource Include="Windows\BookIcon.png" />
+    <Resource Include="Windows\LibraryIcon.jpg" />
+    <Resource Include="Windows\Search.png" />
+    <Resource Include="Windows\SingUpWallpaper.jpg" />
+    <Resource Include="Windows\UserWallpaper.jpg" />
+  </ItemGroup>
+
+</Project>

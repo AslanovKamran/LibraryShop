@@ -1,0 +1,439 @@
+﻿<Window x:Class="AdoNet_Exam.Windows.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdoNet_Exam.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="820" Width="1300" WindowStartupLocation="CenterOwner" Background="Black" WindowState="Maximized"
+        Icon="/Windows/BookIcon.png" ScrollViewer.VerticalScrollBarVisibility="Auto">
+    
+    <Window.Resources>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyles" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"></Setter>
+
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="170"></Setter>
+            <Setter Property="BorderThickness" Value="1.5" ></Setter>
+            <Setter Property="BorderBrush" Value="White" ></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontSize" Value="13"></Setter>
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="5.5" BorderBrush="White" BorderThickness="1.2" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,5,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.3"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="#FF658EAA" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="FontSize" To="14">
+
+                                </DoubleAnimation>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetProperty="FontSize" To="13">
+
+                                </DoubleAnimation>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+
+
+
+
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid>
+            <!--General Grid-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="340"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="550"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--Grid For Books Mapping-->
+            <Grid Grid.Row="0" Grid.ColumnSpan ="3">
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0">Id</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="1">Name</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="2">Publisher Id</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="3">Pages</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="4">Year</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="5">Prime Cost</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="6">Discount</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="7">Price</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="8">Quantity</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="9">Genre</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="10">Author</TextBlock>
+                <Button Name="ExitButton" Click="ExitButton_Click" HorizontalAlignment="Right" Width="40" Height="40" Style="{StaticResource ButtonStyles}" Grid.Column="11">Exit</Button>
+
+            </Grid>
+
+            <!--List For Books Only-->
+            <ListView MouseDoubleClick="ShowBooksName"  ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="ListOfBooks" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch"  SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding Books}">
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <Grid>
+                            
+                            <Grid.ColumnDefinitions>
+                                
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Border BorderThickness="0.5" BorderBrush="White" CornerRadius="5">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"></ColumnDefinition>
+                                        <ColumnDefinition Width="250"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="250"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column ="0" Content ="{Binding Id}"                Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="1" Content ="{Binding Name}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="2" Content ="{Binding PublisherId}"       Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="3" Content ="{Binding AmountOfPages}"     Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="4" Content ="{Binding Year}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="5" Content ="{Binding PrimeCost}"         Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="6" Content ="{Binding DiscountPercent}"   Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="7" Content ="{Binding Price}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="8" Content ="{Binding AmountOfBook}"      Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="9" Content ="{Binding BookGenre}"         Foreground="GhostWhite"    FontSize ="14"></Label>
+                                    <Label Grid.Column ="10" Content ="{Binding BookAuthor}"        Foreground="GhostWhite"    FontSize ="14"></Label>
+
+                                </Grid>
+                            </Border>
+                            
+                            <UniformGrid Grid.Column="1" Columns="1" Rows="1">
+                                <Button Style="{StaticResource ButtonStyles}" Width="55" x:Name="DeleteBook" Click="DeleteBook_Click"  Foreground="White"  Background="DarkRed"  >❌</Button>
+                            </UniformGrid>
+                            
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <Label Grid.Row="2" Background="FloralWhite" Grid.ColumnSpan="3"></Label>
+            
+
+            <!--Publishers-->
+            <Grid Margin="5" Grid.Row="3" Grid.Column="0">
+
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <TextBlock Grid.Row="0" Grid.Column="0">Id</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1">Name</TextBlock>
+
+                    
+ 
+                <Border BorderThickness="2" BorderBrush="White" CornerRadius="15" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1"  >
+                    <ListView x:Name="ListOfPublishers" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch"  SelectedItem="{Binding SelectedPublisher}" ItemsSource="{Binding Publishers}" MouseDoubleClick ="ShowPublishersName" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border BorderThickness="0.5" BorderBrush="White" CornerRadius="5">
+                                            
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Column ="0" Content ="{Binding Id}"                Foreground="GhostWhite"    FontSize ="14"></Label>
+                                                <Label Grid.Column ="1" Content ="{Binding Name}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+
+                                            </Grid>
+                                            
+                                        </Border>
+                                        <UniformGrid Grid.Column="1" Columns="1" Rows="1">
+                                            <Button Style="{StaticResource ButtonStyles}" Width="40" x:Name="DeletePublisher" Click="DeletePublisher_Click"  Foreground="White" Background="DarkRed"  >❌</Button>
+                                        </UniformGrid>
+
+
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+              
+            </Grid>
+            
+            <!--Authors-->
+            <Grid Margin="5" Grid.Row="3" Grid.Column="1">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width ="150"></ColumnDefinition>
+                    <ColumnDefinition Width ="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <TextBlock Grid.Row="0" Grid.Column="0">Id</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1">First Name</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="2">Last Name</TextBlock>
+
+
+
+                <Border BorderThickness="2" BorderBrush="White" CornerRadius="15" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Row="1"  >
+                    <ListView x:Name="ListOfAuthors" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch"  SelectedItem="{Binding SelectedAuthor}" ItemsSource="{Binding Authors}" MouseDoubleClick="ShowAuthorsName">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border BorderThickness="0.5" BorderBrush="White" CornerRadius="5">
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Column ="0" Content ="{Binding Id}"                Foreground="GhostWhite"    FontSize ="14"></Label>
+                                                <Label Grid.Column ="1" Content ="{Binding FirstName}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+                                                <Label Grid.Column ="2" Content ="{Binding LastName}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+
+                                            </Grid>
+
+                                        </Border>
+                                        <UniformGrid Grid.Column="1" Columns="1" Rows="1">
+                                            <Button Style="{StaticResource ButtonStyles}" Width="40" x:Name="DeleteAuthor" Click="DeleteAuthor_Click"  Foreground="White"  Background="DarkRed"  >❌</Button>
+                                        </UniformGrid>
+
+
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+
+            </Grid>
+
+            <!--Genres-->
+            <Grid Margin="5" Grid.Row="3" Grid.Column="2">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <TextBlock Grid.Row="0" Grid.Column="0">Id</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1">Name</TextBlock>
+
+
+
+                <Border BorderThickness="2" BorderBrush="White" CornerRadius="15" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1"  >
+                    <ListView x:Name="ListOfGenres" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch"  SelectedItem="{Binding SelectedGenre}" ItemsSource="{Binding Genres}" MouseDoubleClick ="ShowGenreType" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border BorderThickness="0.5" BorderBrush="White" CornerRadius="5">
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Column ="0" Content ="{Binding Id}"                Foreground="GhostWhite"    FontSize ="14"></Label>
+                                                <Label Grid.Column ="1" Content ="{Binding GenreType}"              Foreground="GhostWhite"    FontSize ="14"></Label>
+
+                                            </Grid>
+
+                                        </Border>
+                                        <UniformGrid Grid.Column="1" Columns="1" Rows="1">
+                                            <Button Style="{StaticResource ButtonStyles}" Width="40" x:Name="DeleteGenre" Click="DeleteGenre_Click"  Foreground="White"  Background="DarkRed" >❌</Button>
+                                        </UniformGrid>
+
+
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+
+            </Grid>
+            <Label Grid.Row="4" Background="FloralWhite" Grid.ColumnSpan="3"></Label>
+
+            <Grid Grid.Row="5" Grid.ColumnSpan="4">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Name="AddBooksButton"     Click="AddBooksButton_Click"        Grid.Row="0" Grid.Column="0"      Style="{StaticResource ButtonStyles}">Add Books</Button>
+                <Button Name="AddAuthorsButton"   Click="AddAuthorsButton_Click"      Grid.Row="0" Grid.Column="1"      Style="{StaticResource ButtonStyles}">Add Authors</Button>
+                <Button Name="AddGenreButton"     Click="AddGenreButton_Click"        Grid.Row="0" Grid.Column="2"      Style="{StaticResource ButtonStyles}">Add Genres</Button>
+                <Button Name="AddPublishers"      Click="AddPublishers_Click"         Grid.Row="0" Grid.Column="3"      Style="{StaticResource ButtonStyles}">Add Publishers</Button>
+                                                  
+                <Button x:Name="UpdateGenre"      Click="UpdateGenre_Click"           Grid.Row="1" Grid.Column="2"      Style="{StaticResource ButtonStyles}">Update Genres</Button>
+                <Button x:Name="UpdatePublisher"  Click="UpdatePublisher_Click"       Grid.Row="1" Grid.Column="3"      Style="{StaticResource ButtonStyles}">Update Publishers</Button>
+                <Button x:Name="UpdateBookButton" Click="UpdateBookButton_Click"      Grid.Row="1" Grid.Column="0"      Style="{StaticResource ButtonStyles}">Update Books</Button>
+                <Button x:Name="UpdateAuthor"     Click="UpdateAuthor_Click"          Grid.Row="1" Grid.Column="1"      Style="{StaticResource ButtonStyles}">Update Authors</Button>
+
+                <Button x:Name="ShowStocksButton" Click="ShowStocksButton_Click" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyles}">View Stocks</Button>
+                <Button x:Name="ShowOrdersButton" Click="ShowOrdersButton_Click" Grid.Column="4" Grid.Row="1" Style="{StaticResource ButtonStyles}">View Orders</Button>
+                
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
